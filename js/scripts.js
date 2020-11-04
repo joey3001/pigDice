@@ -12,10 +12,9 @@ Score.prototype.scoreAddition = function (currentPlayer, standbyPlayer, newScore
     }
     if (newScore === 1) {
       this.player1Score = this.player1Score - scoreTotal;
-      scoreTotal = 0;
-      //[currentPlayer, standbyPlayer, scoreTotal] = switchPlayer(currentPlayer, standbyPlayer, scoreTotal);
+      [currentPlayer, standbyPlayer, scoreTotal] = switchPlayer(currentPlayer, standbyPlayer, scoreTotal);
     }
-    return scoreTotal;
+    return [currentPlayer, standbyPlayer, scoreTotal]
   }
   else {
     this.player2Score += newScore; 
@@ -25,10 +24,9 @@ Score.prototype.scoreAddition = function (currentPlayer, standbyPlayer, newScore
       }
     if (newScore === 1) {
       this.player2Score = this.player2Score - scoreTotal;
-      scoreTotal = 0;
-      alert("Switch Turns!");
+      [currentPlayer, standbyPlayer, scoreTotal] = switchPlayer(currentPlayer, standbyPlayer, scoreTotal);
     }
-    return scoreTotal;
+    return [currentPlayer, standbyPlayer, scoreTotal]
   }
 }
 
@@ -52,7 +50,7 @@ $(document).ready(function() {
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
     let randomNumber1 = randomNumber();
-    scoreTotalTracker = runningScore.scoreAddition(currentPlayer, standbyPlayer, randomNumber1, scoreTotalTracker);
+    [currentPlayer, standbyPlayer, scoreTotalTracker] = runningScore.scoreAddition(currentPlayer, standbyPlayer, randomNumber1, scoreTotalTracker);
     console.log(runningScore);
   });
   $("form#switchPlayer").submit(function(event) {
