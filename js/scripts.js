@@ -51,7 +51,9 @@ $(document).ready(function() {
     event.preventDefault();
     let randomNumber1 = randomNumber();
     [currentPlayer, standbyPlayer, scoreTotalTracker] = runningScore.scoreAddition(currentPlayer, standbyPlayer, randomNumber1, scoreTotalTracker);
-    console.log(runningScore);
+    $(".player1").html(runningScore.player1Score);
+    $(".player2").html(runningScore.player2Score);
+    $(".newScore").html(randomNumber1);
   });
   $("form#switchPlayer").submit(function(event) {
     event.preventDefault();
@@ -60,5 +62,5 @@ $(document).ready(function() {
 }); 
 
 
-
+//function showScore(runningScore)
 
