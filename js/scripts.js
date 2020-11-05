@@ -1,8 +1,10 @@
+//Constructor for our score object 
 function Score (player1Score, player2Score) {
   this.player1Score = player1Score; 
   this.player2Score = player2Score; 
 }
 
+//Business Logic for playing another human locally on the website 
 Score.prototype.scoreAddition = function (currentPlayer, standbyPlayer, newScore, scoreTotal) {
   if (currentPlayer === "player1") {
     this.player1Score += newScore; 
@@ -36,54 +38,78 @@ function switchPlayer (p1,p2,scoreTotal) {
   return [p1,p2,scoreTotal]; 
 }
 
+//Business logic for playing a computer 
 Score.prototype.scoreAdditionIfPlayingComputer = function (newScore, scoreTotal) {
-    $("#userAlert").hide();
-    this.player1Score += newScore; 
-    scoreTotal += newScore; 
-    if (this.player1Score >= 100) {
-    alert("Player 1 wins");
-    }
-    if (newScore === 1) {
-      this.player1Score = this.player1Score - scoreTotal;
-      let roll = randomNumber();
-      let roll1 = randomNumber(); 
-      this.player2Score += roll; 
-      this.player2Score += roll1; 
-      scoreTotal = 0; 
-      $("#userAlert").show();
-      alert("roll 1 is : " + roll);
-      alert("roll 2 is : " + roll1);
-      if (this.player2Score >= 100) {
-        alert("the computer wins");
-      }
-    }
-    return scoreTotal;
-}
-
-Score.prototype.switchPlayerIfPlayingComputer = function () {
-  let roll = randomNumber();
-  let roll1 = randomNumber(); 
-  this.player2Score += roll; 
-  this.player2Score += roll1; 
-  scoreTotal = 0; 
-  $("#userAlert").show();
-  alert("roll 1 is : " + roll);
-  alert("roll 2 is : " + roll1); 
-  if (this.player2Score > 100) {
-    alert("the computer wins");
+  $("#userAlert").hide();
+  this.player1Score += newScore; 
+  scoreTotal += newScore; 
+  if (this.player1Score >= 100) {
+  alert("Player 1 wins");
   }
+  if (newScore === 1) {
+    this.player1Score = this.player1Score - scoreTotal;
+    let roll = randomNumber();
+    alert("roll 1 is : " + roll)
+    if (roll === 1) {
+      $("#userAlert").show();
+      scoreTotal = 0;
+    }
+    else {
+      let roll1 = randomNumber(); 
+      alert("roll 2 is : " + roll1);
+        if (roll1 === 1) {
+          this.player2Score += roll; 
+          $("#userAlert").show();
+          scoreTotal = 0;
+        }
+        else {
+          this.player2Score += roll; 
+          this.player2Score += roll1; 
+          scoreTotal = 0; 
+          $("#userAlert").show();
+          if (this.player2Score >= 100) {
+            alert("the computer wins");
+            }
+          }
+        }
+      }
   return scoreTotal;
 }
 
+Score.prototype.switchPlayerIfPlayingComputer = function () {
+    let roll = randomNumber();
+    let scoreTotal = 0
+    alert("roll 1 is : " + roll)
+    if (roll === 1) {
+      $("#userAlert").show();
+    }
+    else {
+      let roll1 = randomNumber(); 
+      alert("roll 2 is : " + roll1);
+        if (roll1 === 1) {
+          this.player2Score += roll; 
+          $("#userAlert").show();
+        }
+        else {
+          this.player2Score += roll; 
+          this.player2Score += roll1; 
+          $("#userAlert").show();
+          if (this.player2Score >= 100) {
+            alert("the computer wins");
+            }
+          }
+        }
+  return scoreTotal;
+}
+
+//business logic used in both playing another human and playing a computer scenarios 
 function randomNumber () {
   return Math.floor(Math.random() * 6) + 1; 
 }
 
 $(document).ready(function() {
   let runningScore = new Score(0,0);
-  let currentPlayer; 
-  let standbyPlayer; 
-  [currentPlayer , standbyPlayer] = ["player1", "player2"];
+  let [currentPlayer , standbyPlayer] = ["player1", "player2"];
   let scoreTotalTracker = 0; 
   let x = "human"; 
   $("#computer").click(function (){
