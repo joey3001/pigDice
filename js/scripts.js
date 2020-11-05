@@ -40,13 +40,12 @@ function switchPlayer (p1,p2,scoreTotal) {
   return [p1,p2,scoreTotal]; 
 }
 
-let runningScore = new Score(0,0);
-let currentPlayer; 
-let standbyPlayer; 
-[currentPlayer , standbyPlayer] = ["player1", "player2"];
-let scoreTotalTracker = 0; 
-
 $(document).ready(function() {
+  let runningScore = new Score(0,0);
+  let currentPlayer; 
+  let standbyPlayer; 
+  [currentPlayer , standbyPlayer] = ["player1", "player2"];
+  let scoreTotalTracker = 0; 
   $("form#rollDice").submit(function(event) {
     event.preventDefault();
     let randomNumber1 = randomNumber();
@@ -60,7 +59,4 @@ $(document).ready(function() {
     [currentPlayer, standbyPlayer, scoreTotalTracker] = switchPlayer(currentPlayer, standbyPlayer);
   });
 }); 
-
-
-//function showScore(runningScore)
 
