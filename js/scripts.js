@@ -77,28 +77,28 @@ Score.prototype.scoreAdditionIfPlayingComputer = function (newScore, scoreTotal)
 }
 
 Score.prototype.switchPlayerIfPlayingComputer = function () {
-    let roll = randomNumber();
-    let scoreTotal = 0
-    alert("roll 1 is : " + roll)
-    if (roll === 1) {
-      $("#userAlert").show();
-    }
-    else {
-      let roll1 = randomNumber(); 
-      alert("roll 2 is : " + roll1);
-        if (roll1 === 1) {
-          this.player2Score += roll; 
-          $("#userAlert").show();
-        }
-        else {
-          this.player2Score += roll; 
-          this.player2Score += roll1; 
-          $("#userAlert").show();
-          if (this.player2Score >= 100) {
-            alert("the computer wins");
-            }
+  let roll = randomNumber();
+  let scoreTotal = 0
+  alert("roll 1 is : " + roll)
+  if (roll === 1) {
+    $("#userAlert").show();
+  }
+  else {
+    let roll1 = randomNumber(); 
+    alert("roll 2 is : " + roll1);
+      if (roll1 === 1) {
+        this.player2Score += roll; 
+        $("#userAlert").show();
+      }
+      else {
+        this.player2Score += roll; 
+        this.player2Score += roll1; 
+        $("#userAlert").show();
+        if (this.player2Score >= 100) {
+          alert("the computer wins");
           }
         }
+      }
   return scoreTotal;
 }
 
