@@ -1,3 +1,7 @@
 body {
   background-color: rgb(152, 152, 235);
 }
+
+#userAlert {
+  display: none; 
+}
